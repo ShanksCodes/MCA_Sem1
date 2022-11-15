@@ -12,17 +12,17 @@ public class Pattern
 	 do{  
 	   int i=0,j=0,k=0,q=1,l=0;
 	   System.out.println("\n\n*******************************************************************\n\n");
-	   System.out.println("1.Press 1 for pattern 1");
-	   System.out.println("2.Press 2 for pattern 2");
-	   System.out.println("3.Press 3 for pattern 3");
-	   System.out.println("4.Press 4 for pattern 4");
-	   System.out.println("5.Press 5 for pattern 5");
-	   System.out.println("6.Press 6 for pattern 6");
+	   System.out.println("1.Press 1 for pattern 1(half pyramid-a");
+	   System.out.println("2.Press 2 for pattern 2(half pyramid-b)");
+	   System.out.println("3.Press 3 for pattern 3(number pyramid)");
+	   System.out.println("4.Press 4 for pattern 4(pyramid)");
+	   System.out.println("5.Press 5 for pattern 5(diamond)");
+	   System.out.println("6.Press 6 for pattern 6(number diamond)");
+	   System.out.println("7.Press 7 for pattern 7(double dorrito)");
 	   
 	   int choice= sc.nextInt();
 	   
-	   System.out.print("\n\nEnter the number of rows for the pattern: ");
-	   n= sc.nextInt();
+
 	   System.out.println("\n");
 	   
 					 
@@ -30,7 +30,11 @@ public class Pattern
 	   switch(choice)
 	    {
 	      case 1: 
-		          k=1;
+		          
+				  System.out.print("\nEnter the number of rows for the pattern: ");
+	              n= sc.nextInt();
+				  System.out.println("\n");
+				  k=1;
 				  for (i=1;i<=n;i++)
 				   {
 					 for(j=1;j<=n;++j)
@@ -46,7 +50,10 @@ public class Pattern
 		          break;
 				  
 	      case 2: 
-		          k=n;
+		          System.out.print("\nEnter the number of rows for the pattern: ");
+	              n= sc.nextInt();
+				  System.out.println("\n");
+				  k=n;
 				  int m =n;
 				  for (i=1;i<=n;i++)
 				   {
@@ -65,6 +72,9 @@ public class Pattern
 		  
 		  case 3: 
 		          
+				  System.out.print("\nEnter the number of rows for the pattern: ");
+	              n= sc.nextInt();
+				  System.out.println("\n");
 				  for(i=1;i<=n;++i)
 				   {
 					   for(j=1;j<=(2*n-1);++j)
@@ -91,7 +101,9 @@ public class Pattern
 				  
 				  		  
 		  case 4: 
-		          
+				  System.out.print("\nEnter the number of rows for the pattern: ");
+	              n= sc.nextInt();	
+                  System.out.println("\n"); 				  
 				  for(i=1;i<=n;++i)
 				   {
 					   for(j=1;j<=(2*n-1);++j)
@@ -115,7 +127,9 @@ public class Pattern
 				  
 				  				  		  
 		  case 5: 
-		          
+				  System.out.print("\nEnter the number of rows for the pattern: ");
+	              n= sc.nextInt();	
+                  System.out.println("\n");					  
 				  n = (n+1)/2;
 				  
 				  for(i=1;i<=n;++i)
@@ -167,7 +181,9 @@ public class Pattern
 		
 		
    		  case 6: 
-		          
+				 System.out.print("\nEnter the number of rows for the pattern: ");
+	             n= sc.nextInt();	          
+				 System.out.println("\n");	
 				 n = (n+1)/2;
 				 
 				  for(i=1;i<=n;++i)
@@ -225,7 +241,55 @@ public class Pattern
                      System.out.println();					   
 				   }   
 		
-		
+		   case 7:
+				  System.out.print("\nEnter the number of rows for single dorrito: ");
+	              n= sc.nextInt();   
+                  System.out.println("\n");				  
+				  
+				  for(i=1;i<=n;++i)
+				   {
+					   
+					  for(j=1;j<=(2*n-1);++j)
+					   {
+						   
+						 if(j<=(n))
+						  {
+							 if(j>=i)
+                               System.out.print("* ");
+                             else
+                               System.out.print("  ");								 
+							  
+						  }		
+
+                        else
+                         System.out.print("  ");							
+					   }	
+                     System.out.println();					   
+				   }
+				   
+				   
+				  for(i=1;i<=n;++i)
+				   {
+					   
+					  for(j=1;j<=(2*n-1);++j)
+					   {
+						   
+						 if(j>=(n))
+						  {
+							 if((i+j)<=2*n)
+                               System.out.print("* ");
+                             else
+                               System.out.print("  ");								 
+							  
+						  }		
+
+                        else
+                         System.out.print("  ");							
+					   }	
+                     System.out.println();					   
+				   }				  
+				  
+				  break; 
 		  default: System.out.println("\nInvalid entry!");
 	    }
 		
