@@ -1,0 +1,37 @@
+
+create table dept_at(
+  deptno number(2,0),
+  dname varchar2(14),
+  loc varchar2(13),
+  constraint pk_dept primary key (deptno)
+);
+
+desc dept_at;
+
+create table emp_at
+ (
+   empno number(4,0),
+   ename varchar2(10) not null,
+   job varchar2(9) default 'Clerk' check (job in ('Manager', 'Clerk', 'OfficeAssistant')),
+   mgr number(4,0),
+   hiredate date,
+   sal number(7,2),
+   comm number(7,2),
+   deptno number(2),
+   constraint pk_emp primary key(empno),
+   constraint fk_deptno foreign key(deptno) references dept_at(deptno) 
+ );
+
+desc emp_at;
+
+
+select*from tab;
+
+
+select constraint name, constraint type, table_name from user_constraints where table_name='EMP_AT';
+
+alter table emp_at drop constraint 'emp_at';
+alter table emp_at add constraint prky_emp primary key(empno); 
+
+
+
