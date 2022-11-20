@@ -1,4 +1,4 @@
---zz
+
 create table dept_at(
   deptno number(2,0),
   dname varchar2(14),
