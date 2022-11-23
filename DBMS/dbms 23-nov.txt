@@ -1,0 +1,162 @@
+create table Customer(
+  CustID number(5),
+  CustName varchar2(14),
+  ContactNo varchar2(10)
+ 
+);
+
+desc Customer;
+
+
+create table Product(
+  ProdID number(5),
+  ProdName varchar2(15),
+  Qty number(5),
+  Price number(7,2)
+
+);
+
+desc Product;
+
+alter table Customer drop primary key;
+alter table Customer add constraint pk_Customer primary key(CustId);
+alter table Customer modify(CustName not null);
+alter table Customer modify(ContactNo not null);
+
+alter table Product add constraint pk_Product primary key(ProdID);
+alter table Product modify(ProdName not null);
+alter table Product modify(Qty not null);
+alter table Product modify(Price not null);
+
+
+
+create table Ord(
+ OrdID number(5),
+ OrdDate date not null,
+ CustID number(5),
+ ProdID number(5),
+ QtyOrdered number(5) not null
+
+);
+--alter table Customer modify(CustId varchar(5));
+--alter table Ord modify(CustID varchar(5));
+alter table Product modify(Price Number(10,2));
+
+
+alter table Ord add constraint fk_CustID foreign key(CustID) references Customer(CustID);
+alter table Ord add constraint fk_ProdID foreign key(ProdID) references Product(ProdID);
+alter table Ord add constraint pk_OrdID primary key(OrdID);
+
+alter table Ord modify(CustId not null);
+alter table Ord modify(ProdId not null);
+
+
+
+desc Customer;
+desc Product;
+desc Ord;
+select*from tab;
+
+
+select constraint_name, constraint_type, table_name from user_constraints where table_name='Customer';
+select constraint_name, constraint_type, table_name from user_constraints where table_name='Product';
+select constraint_name, constraint_type, table_name from user_constraints where table_name='Ord';
+
+
+insert into Customer values(1001, 'Joe',9123456423);
+insert into Customer values(1002, 'Moe',9187453214);
+insert into Customer values(1003, 'Gloe',9908234567);
+insert into Customer values(1004, 'Harold',9445533213);
+insert into Customer values(1005, 'Shyam',9443556213);
+
+select*from Customer;
+
+
+
+insert into Product values(2001, 'smartphone',2,10000);
+insert into Product values(2002, 'mixer',5,7250);
+insert into Product values(2003, 'TV',5,150000);
+insert into Product values(2004, 'Elden Ring CD',2,5000);
+insert into Product values(2005, 'PS5',5,420000);
+
+select*from Product;
+
+
+insert into Ord values(3002,'25-nov-2022',1002,2002,1);
+insert into Ord values(3001,'13-nov-2022',1001,2001,3);
+insert into Ord values(3004,'11-nov-2022',1004,2004,2);
+insert into Ord values(3003,'12-nov-2022',1003,2003,2);
+insert into Ord values(3005,'14-nov-2022',1005,2005,1);
+
+update Ord set OrdDate='10-nov-2022' where OrdDate='25-nov-2022';
+
+select*from Ord;
+
+update Ord set OrdDate='20-Nov-22' where OrdDate='14-Nov-22';
+
+
+--------------------------------------------------new tables----------------------------------------
+
+
+create table Emp
+(
+  Empno number(7),
+  Ename varchar2(20),
+  DeptNo number(5)
+
+);
+
+create table Dept
+(
+  Deptno number(5),
+  Dname varchar2(20),
+  Loc varchar2(20)
+
+);
+
+alter table Dept add constraint fk_DeptNo2 foreign key(DeptNo) references Emp(DeptNo2);
+
+drop table Emp;
+drop table Dept;
+
+desc Emp;
+alter table Emp add(DeptNo2 number(3));
+alter table Emp modify(DeptNo primary key);
+
+alter table Emp modify(DeptNo2 primary key);
+
+
+desc Dept;
+
+insert into Emp values(1234,'Joe',12345,123);
+insert into Emp values(1234,'Joe',12345,12);
+
+insert into Emp values(1234,'Joe',12345,1234); //wont work cuz number precision is set to 3 digit number only
+
+
+
+insert into Dept values(123,'cs','govindpuri');
+insert into Dept values(12,'mba','dwarka');
+
+insert into Dept values(323,'cse','kalkaji');
+
+
+alter table Emp modify(DeptNo2 number(10));
+
+
+insert into Emp values(1234,'Roe',12245,1234567);
+
+insert into Dept values(1234567,'mba','dwarka');
+
+
+
+
+
+
+
+
+
+
+
+
+
