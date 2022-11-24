@@ -1,0 +1,56 @@
+
+create table Emp2
+(
+  EmpNo number(5) constraint ep primary key,
+  Ename varchar2(20),
+  Sal number(8,2),
+  Dno number(3)
+);
+
+create table Dept2
+(
+  DeptNo number(5) constraint dp primary key,
+  Dname varchar2(20),
+  Loc varchar2(20)
+);
+
+alter table Emp2 add (constraint efk foreign key(Dno) references Dept2(DeptNo));
+
+
+
+select TABLE_NAME,CONSTRAINT_NAME, CONSTRAINT_TYPE, TABLE_NAME
+from USER_CONSTRAINTS;
+
+
+insert into Dept2 values(101,'CSE','Kalkaji');
+
+insert into Dept2 values(102,'MBA','Dwarka');
+
+insert into Dept2 values(103,'Mechanical','Palam');
+
+select*from Dept2;
+
+
+insert into Emp2 values(1001,'Joe',800000,103);
+insert into Emp2 values(1002,'Moe',750000,102);
+
+insert into Emp2 values(1003,'Roe',660000.33,101);
+
+select*from Emp2;
+
+
+create table Emp_copy as select*from Emp;
+
+select*from Emp_copy;
+
+select TABLE_NAME,CONSTRAINT_NAME, CONSTRAINT_TYPE, TABLE_NAME
+from USER_CONSTRAINTS;
+
+
+
+
+
+
+
+
+
