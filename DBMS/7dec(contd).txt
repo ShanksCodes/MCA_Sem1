@@ -1,0 +1,97 @@
+create table emp as select*from Scott.Emp;
+desc Emp; 
+
+select*from emp;
+drop table emp;
+drop table dept;
+create table dept as select*from Scott.dept;
+
+select*from dept;
+
+alter table Emp add constraint pk_emp primary key(empno);
+alter table dept drop primary key;
+
+alter table dept add constraint pk_dept primary key(deptno);
+
+alter table emp add constraint fk_Empdept foreign key(DeptNo) references dept(DeptNo);
+
+
+select constraint_name, constraint_type, table_name from user_constraints;
+
+
+
+select distinct(deptno) from emp
+
+select distinct(job) from emp;
+
+
+select*from emp order by deptno,sal asc;
+
+select*from emp order by sal,deptno asc;
+
+select*from emp order by deptno asc, job desc;
+
+select empno,ename,sal,comm, (sal+comm) as tot_salary from emp order by tot_salary asc;
+
+select empno,ename,sal,comm, (sal+comm) from emp;
+
+
+select empno,ename,sal,comm, (sal+nvl(comm,0)) as tot_salary from emp order by tot_salary asc;
+
+--select empno,ename,sal,nvl(comm,0) as comm, (sal+comm) as tot_salary from emp order by tot_salary asc;
+
+select*from emp where comm is null;
+
+select*from emp where comm is not null;
+
+select*from emp order by job asc;
+
+
+select*from emp where job<>'CLERK' and job<>'ANALYST' order by job desc;
+
+select*from emp where job='CLERK' or job='ANALYST' order by job desc, ename asc;
+
+select*from emp where deptno=10 or deptno=20;
+
+select*from emp where (sal*12) between 122000 and 145000;
+
+--with column as pas
+
+select empno,ename,job,mgr,hiredate,deptno, (sal*12) as pas from emp where pas between 122000 and 145000;
+select empno,ename,job,mgr,hiredate,deptno, (sal*12) as pas from emp;
+
+
+select*from emp where job<>'PRESIDENT' and job<>'MANAGER' order by sal desc;
+
+
+select*from emp where ename='SMITH';
+
+select*from emp where ename='SMITH' or ename='MILLER';
+
+select ename,sal from emp where sal>1000;
+
+select ename,sal from emp where sal not between 1500 and 2850;
+
+select ename,sal from emp where ename not in('JAMES','MILLER');
+
+select ename as employee, sal as monthly_salary from emp where sal>1500 and deptno not in(10,.20);
+ 
+ select*from emp;
+ select*from dept;
+                        
+select ename,dname,emp.deptno,dept.deptno from emp, dept;    
+
+select ename,dname,emp.deptno from emp, dept where emp.deptno=dept.deptno;  
+
+select ename,dname,e.deptno, d.deptno from emp e, dept d where e.deptno=d.deptno;            
+
+select emp.empno,sal, ename, emp.deptno from emp, dept where emp.deptno=dept.deptno and emp.deptno=10 and sal>3000;
+
+
+
+
+
+
+
+
+
