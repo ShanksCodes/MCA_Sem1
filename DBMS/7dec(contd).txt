@@ -89,6 +89,34 @@ select emp.empno,sal, ename, emp.deptno from emp, dept where emp.deptno=dept.dep
 
 
 
+///// dec 8////
+
+select emp.empno,sal, ename, emp.deptno from emp inner join dept on emp.deptno=dept.deptno where emp.deptno=10 and sal>3000;
+
+
+
+select emp.empno,sal, ename, emp.deptno from emp inner join dept on emp.deptno=dept.deptno;
+
+select emp.empno,sal, ename, emp.deptno from emp join dept on emp.deptno=dept.deptno;
+
+select*from emp natural join dept;
+
+select deptno, ename, dname from emp natural join dept;
+
+select distinct deptno from dept;
+select distinct(deptno) from emp;
+
+select*from emp;
+update emp set deptno=null where job='CLERK';
+
+select dept.deptno, ename,dname from emp left outer join dept on emp.deptno=dept.deptno;
+
+select dept.deptno,ename,dname from emp right outer join dept on emp.deptno=dept.deptno;
+
+select dept.deptnno,ename,dname from emp full outer join dept on emp.deptno=dept.deptno;
+
+
+
 
 
 
