@@ -9,7 +9,8 @@ class AllFunctions
    {
 	   
 	   int i=0,j=0;
-	   s.toLowerCase();
+	 //  s.toLowerCase();  does not work 
+	   s=s.toLowerCase();
 	   
 	   String s1="";
 	   
@@ -31,13 +32,13 @@ class AllFunctions
 		//printing reverse
 		for (i=0; i<s1.length(); i++)
          {
-        ch= str.charAt(i); //extracts each character
+        ch= s1.charAt(i); //extracts each character
         nstr= ch+nstr; //adds each character in front of the existing string
          }
 		 
 		 
       System.out.println("Reversed word: "+ nstr);
-    }
+    
 		
 		for(i=0,j=s1.length()-1; i<j; ++i,--j)
 		 {

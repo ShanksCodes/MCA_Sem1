@@ -1,0 +1,172 @@
+
+create table EMPLOYEE
+ (
+   empno varchar2(10),
+   empname varchar2(40),
+   street varchar2(12),
+   city varchar2(15)
+ );
+ 
+ 
+ 
+ create table DEPARTMENT
+ (
+   deptid varchar2(10),
+   deptname varchar2(15),
+   city varchar2(15)
+ );
+ 
+ 
+ create table WORKS
+ (
+   empno varchar2(10),
+   deptid varchar2(10),
+   salary number(8)
+ );
+ 
+ 
+  create table MANAGES
+ (
+   empno varchar2(10),
+   managerid varchar2(10)
+  
+ );
+ 
+--alter table EMPLOYEE add empname varchar2(40);
+SELECT table_name FROM user_tables; 
+ 
+alter table EMPLOYEE add constraint pk_employee primary key(empno);
+ 
+alter table DEPARTMENT add constraint pk_department primary key(deptid);
+ 
+alter table MANAGES add constraint fk_manages2 foreign key(managerid) references EMPLOYEE(empno);
+
+alter table WORKS add constraint fk_works1 foreign key(empno) references EMPLOYEE(empno);
+
+alter table WORKS add constraint fk_works2 foreign key(deptid) references DEPARTMENT(deptid);
+
+alter table MANAGES add constraint fk_manages foreign key(empno) references EMPLOYEE(empno);
+
+
+select constraint_name, constraint_type, table_name from user_constraints;
+
+
+
+
+insert into EMPLOYEE values('1001','Virender','AB','Delhi');
+insert into EMPLOYEE values('1002','Sachin','AA','Delhi');
+insert into EMPLOYEE values('1003','Mahendra','AC','Banglore');
+insert into EMPLOYEE values('1004','Gautam','BG','Hydrabad');
+insert into EMPLOYEE values('1005','Dinesh','LM','Delhi');
+insert into EMPLOYEE values('1006','Preeti','AB','Delhi');
+insert into EMPLOYEE values('1007','Bhavya','JK','UP');
+insert into EMPLOYEE values('1008','Zaheer','AB','Delhi');
+insert into EMPLOYEE values('1009','Ankita','JK','UP');
+insert into EMPLOYEE values('1010','Yuvraj','JK','UP');
+insert into EMPLOYEE values('1011','Jaspreet','FF','Banglore');
+insert into EMPLOYEE values('1012','Hardik','ZY','Hydrabad');
+insert into EMPLOYEE values('1013','Shrayas','VG','Banglore');
+insert into EMPLOYEE values('1014','Sukriti','GH','UP');
+insert into EMPLOYEE values('1015','Jasmine','NM','Hydrabad');
+
+
+select*from EMPLOYEE;
+ 
+
+insert into DEPARTMENT values('10','Finance','Delhi');
+insert into DEPARTMENT values('11','Sales','Banglore');
+insert into DEPARTMENT values('12','Account','Hydrabad');
+insert into DEPARTMENT values('13','Inventory','UP');
+
+select*from DEPARTMENT;
+delete from department;
+
+insert into WORKS values('1001','10',10000);
+insert into WORKS values('1002','13',6000);
+insert into WORKS values('1003','13',10000);
+insert into WORKS values('1004','12',10000);
+insert into WORKS values('1005','10',6500);
+insert into WORKS values('1006','11',7500);
+insert into WORKS values('1007','10',15000);
+insert into WORKS values('1008','11',7000);
+insert into WORKS values('1009','11',11000);
+insert into WORKS values('1010','13',9000);
+insert into WORKS values('1011','12',16000);
+insert into WORKS values('1012','10',10000);
+insert into WORKS values('1013','10',11000);
+insert into WORKS values('1014','10',20000);
+insert into WORKS values('1015','10',13000);
+
+select*from WORKS;
+
+
+insert into MANAGES values('1001','1002');
+insert into MANAGES values('1003','1002');
+insert into MANAGES values('1004','1006');
+insert into MANAGES values('1005','1002');
+insert into MANAGES values('1007','1010');
+insert into MANAGES values('1008','1002');
+insert into MANAGES values('1009','1006');
+insert into MANAGES values('1011','1014');
+insert into MANAGES values('1012','1010');
+insert into MANAGES values('1013','1014');
+insert into MANAGES values('1015','1014');
+
+select*from MANAGES;
+
+
+select*from EMPLOYEE;
+select*from DEPARTMENT;
+select*from WORKS;
+select*From MANAGES;
+
+
+ 
+
+ 
+ --Query 1
+
+select e.empname from employee e,department d ,works w where w.empno=e.empno and w.deptid=d.deptid and d.deptname='Finance';
+ 
+ --Query 2
+
+select e.empname, e.city from employee e,department d ,works w where w.empno=e.empno and w.deptid=d.deptid and d.deptname='Finance';
+
+--Q3
+select e.empname, e.street, e.city from employee e,department d ,works w where w.empno=e.empno and w.deptid=d.deptid and d.deptname='Finance' and w.salary>10000;
+
+--Q4
+select e.empname, e.street, e.city from employee e,department d ,works w where w.empno=e.empno and w.deptid=d.deptid and e.city=d.city;
+
+--Q5
+select e.empname from employee e, employee e1, manages m
+where m.empno = e.empno and m.managerid = e1.empno and e.city = e1.city and e.street = e1.street ;
+
+--Q6
+select e.empname, e.city from employee e,department d ,works w where w.empno=e.empno and w.deptid=d.deptid and d.deptname<>'Finance';
+
+--Q7
+
+select empno from works
+where salary >
+(select max(salary)
+from works
+where deptid = (select deptid from department where deptname='Sales')) ;
+
+--Q8
+select deptname from department where City IN (select City from department where deptname ='Sales');
+
+--Q9
+select e.empname ,w.empno from works w, employee e  where e.empno=w.empno and salary >(select avg(salary) from works s where w.deptid = s.deptid)
+
+--Q10
+select deptname, count(*) as countt from works w,department d,employee e where w.deptid=d.deptid and w.empno=e.empno group by deptname order by countt desc; 
+
+--Q11
+select deptid from works group by deptid having sum(salary) <= all (select sum(salary) from works group by deptid);
+
+--Q12
+select d.deptid,d.deptname,avgsal.sal from department d,works w,(select deptname,avg(salary) as sal from department d1,works w1 
+where d1.deptid=w1.deptid and d1.deptname<>'Finance' group by d1.deptname) as avgsal
+where w.deptid=d.deptid and d.deptname=avgsal.deptname and
+avgsal.sal>(select avg(salary) from department d2,works w2 where d2.deptid=w2.deptid and d2.deptname='Finance');
