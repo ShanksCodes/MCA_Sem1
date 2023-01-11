@@ -1,0 +1,61 @@
+create table emp as select*from scott.emp;
+create table dept as select*from scott.dept;
+desc emp;
+
+select*from emp;
+
+create view empt_view as select empno,ename,sal from emp;
+select*from empt_view;
+--create view viewname as select empno,ename,salary from emp
+--select*from viewname
+
+select*from dept;
+
+create view empdept_view as select ename,dname from emp, dept where emp.deptno=dept.deptno;
+
+select*from empdept_view;
+
+insert into empdept_view values('Abhi','CSE');
+--cannot modify a column whiuch maps to a non key preserved table
+
+----------DCL -> GRANT, REVOKE---------------------
+
+create user sbadmin'
+identified by db;
+grant all privileges to sbadmin;
+--software System admin (id pwd) for above commands
+
+--now login as sbadmin db in another instance, down below commmands
+-- :-
+
+create table emp 
+(
+  eno number(5) primary key,
+  ename varchar2(20)
+);
+
+insert into emp values(1,'a'); etc  --still in sbadmin
+grant select on emp to sbopr;
+--below also in sbadmin
+
+create table dept (
+  dno number(5),
+  dname varchar2(20)
+);
+select*from tab; --no of tables
+insert into dept values(101,'As');
+
+revoke all privileges from sbopr;
+
+
+--create new user sbopr from system, grant all privilges
+
+select*from sbadmin.emp;
+select*from sbadmin.dept;  //if sbopr did not have all priviloeges, this statement wouldnt have run since select privileges for this particular table not defined under sbadmin
+
+
+
+
+
+
+--sbopr:
