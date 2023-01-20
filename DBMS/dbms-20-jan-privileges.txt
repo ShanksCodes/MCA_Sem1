@@ -1,6 +1,9 @@
 system/admin:
-create user1 identified by user1;
-grant connect...
+create user user1 identified by user1;
+grant connect,resource to user1;
+
+create user user1 identified by user2;
+grant connect,resource to user2;
 
 
 user1:
