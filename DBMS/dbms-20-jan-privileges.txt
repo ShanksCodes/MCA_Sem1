@@ -1,0 +1,34 @@
+system/admin:
+create user1 identified by user1;
+grant connect...
+
+
+user1:
+select*from orderr;
+
+insert into orderr values(111,'01-jan-23',222);
+select*from orderr;
+grant select on orderr to user2;
+
+(above all in user1)
+
+
+user2:
+select*from user1.orderr;
+insert into user1.orderr values(112,'02-jan-23',223);
+
+
+user1:
+grant select,insert on orderr to user2;
+
+
+user2:
+insert into user1.orderr values(112,'02-jan-23',223);
+select*from user1.orderr;
+
+
+user1:
+revoke select,insert on orderr from user2;
+
+user2:
+select*from user1.orderr;
