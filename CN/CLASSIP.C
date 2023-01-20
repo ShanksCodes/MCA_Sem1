@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <conio.h>
+#include <stdlib.h>
 
 void main(){
 int a,b,c,d;
@@ -23,6 +24,7 @@ d>=0 && d<=255)
 
 else
 printf("Address invalid");
+exit(0);
 
 
 
