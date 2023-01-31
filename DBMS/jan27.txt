@@ -129,9 +129,48 @@ Begin
 End;  
 
 
+-----------------------------------------------------------------------------
+
+
+Declare
+ EREC EMP%ROWTYPE;
+  
+BEGIN
+ SELECT*INTO EREC FROM EMP WHERE EMPNO=7839;
+
+dbms_output.put_line('EMPNO: ' || EREC.EMPNO);
+dbms_output.put_line('ENAME: ' || EREC.ENAME);
+
+END;
 
 
 
+------------------------------------------------------------
+
+create table emp from scott.emp;
 
 
+Declare
+ ENO EMP.EMPNO%TYPE;
+ ENM EMP.ENAME%TYPE;  
+BEGIN
+ SELECT EMPNO,ENAME INTO ENO,ENM FROM EMP WHERE EMPNO=7839;
 
+dbms_output.put_line('EMPNO: ' || ENO);
+dbms_output.put_line('ENAME: ' || ENM);
+
+END;
+
+-------------------------------------------------------------
+
+
+Declare
+ ENO NUMBER;
+ ENM VARCHAR(30);  
+BEGIN
+ SELECT EMPNO,ENAME INTO ENO,ENM FROM EMP WHERE EMPNO=7839;
+
+dbms_output.put_line('EMPNO: ' || ENO);
+dbms_output.put_line('ENAME: ' || ENM);
+
+END;
