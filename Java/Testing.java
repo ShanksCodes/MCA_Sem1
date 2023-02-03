@@ -52,7 +52,12 @@ class AllFunctions
 		 
 		 return flag;
    }  
-}
+   
+   
+   
+   
+   
+ }  //end of class
 
 
 class Testing
