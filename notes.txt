@@ -34,4 +34,4 @@ alter table emp_at drop constraint 'emp_at';
 alter table emp_at add constraint prky_emp primary key(empno); 
 
 
-
+//works
